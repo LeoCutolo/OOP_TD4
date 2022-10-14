@@ -37,24 +37,18 @@ public class StudentController implements Initializable {
     @FXML
     private TextField txtName;
 
+    DBManager dbManager;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        dbManager = new DBManager();
         List<String> gvalues = new ArrayList<String>();
         gvalues.add("Male");
         gvalues.add("Female");
         ObservableList<String> gender = FXCollections.observableArrayList(gvalues);
         cmbGender.setItems(gender);
 
-        List<Student> hardStudents = new ArrayList<>();
-        hardStudents.add(new Student(1,"lolo","female"));
-        hardStudents.add(new Student(2,"lili","male"));
-
-        ObservableList<Student> students= FXCollections.observableArrayList(hardStudents);
-        lvStudentList.setItems(students);
-
-        lvStudentList.getSelectionModel().selectedItemProperty().addListener(e->
-        displayStudentDetails(lvStudentList.getSelectionModel().getSelectedItem()));
-
+        fetchStudents();
     }
 
     private void displayStudentDetails(Student selectedStudent) {
@@ -63,4 +57,12 @@ public class StudentController implements Initializable {
             cmbGender.setValue(selectedStudent.getGender());
         }
     }
+
+    public void fetchStudents() {
+        List<Student> listStudents=dbManager.loadStudents();
+        if (listStudents!=null) {
+            ObservableList<Student> students;
+            students= FXCollections.observableArrayList(listStudents);
+            lvStudentList.setItems(students);
+        }
 }
