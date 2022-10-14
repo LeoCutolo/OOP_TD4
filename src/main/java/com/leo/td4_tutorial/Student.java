@@ -41,7 +41,6 @@ public class Student {
     }
 
     public String toString(){
-        String result = "( " + name + ", " + gender + " )";
-        return result;
+        return "( " + name + ", " + gender + " )";
     }
 }
