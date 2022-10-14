@@ -59,10 +59,11 @@ public class StudentController implements Initializable {
     }
 
     public void fetchStudents() {
-        List<Student> listStudents=dbManager.loadStudents();
-        if (listStudents!=null) {
+        List<Student> listStudents = dbManager.loadStudents();
+        if (listStudents != null) {
             ObservableList<Student> students;
-            students= FXCollections.observableArrayList(listStudents);
+            students = FXCollections.observableArrayList(listStudents);
             lvStudentList.setItems(students);
         }
+    }
 }
