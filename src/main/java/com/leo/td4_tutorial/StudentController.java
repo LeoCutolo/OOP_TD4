@@ -32,7 +32,7 @@ public class StudentController implements Initializable {
     private Label lblStudentList;
 
     @FXML
-    private ListView<String> lvStudentList;
+    private ListView<Student> lvStudentList;
 
     @FXML
     private TextField txtName;
@@ -44,6 +44,13 @@ public class StudentController implements Initializable {
         gvalues.add("Female");
         ObservableList<String> gender = FXCollections.observableArrayList(gvalues);
         cmbGender.setItems(gender);
+
+        List<Student> hardStudents = new ArrayList<>();
+        hardStudents.add(new Student(1,"lolo","female"));
+        hardStudents.add(new Student(2,"lili","male"));
+        ObservableList<Student> students= FXCollections.observableArrayList(hardStudents);
+        lvStudentList.setItems(students);
+
 
     }
 }
